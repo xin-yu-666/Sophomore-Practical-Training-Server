@@ -11,7 +11,7 @@
         <result property="author" column="author"/>
         <result property="imageUrl" column="imageUrl"/>
         <result property="content" column="content"/>
-        <result property="createTime" column="create_time"/>
+        <result property="createTime" column="createTime"/>
     </resultMap>
 
     <select id="findAll" resultMap="newsResultMap">
@@ -27,7 +27,7 @@
                 AND author LIKE CONCAT('%', #{author}, '%')
             </if>
         </where>
-        ORDER BY create_time DESC
+        ORDER BY createTime DESC
     </select>
 
     <select id="findById" resultMap="newsResultMap">
@@ -35,7 +35,7 @@
     </select>
 
     <insert id="insert" parameterType="com.example.trainingserver.entity.News">
-        INSERT INTO news (title, summary, author, imageUrl, content, create_time)
+        INSERT INTO news (title, summary, author, imageUrl, content, createTime)
         VALUES (#{title}, #{summary}, #{author}, #{imageUrl}, #{content}, #{createTime})
     </insert>
 
