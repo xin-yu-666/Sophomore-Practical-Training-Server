@@ -7,13 +7,7 @@
     <list default="true" id="b9a6afe5-5213-4f57-8f16-7204490f719f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/TrainingServerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/trainingserver/TrainingServerApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/entity/News.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/trainingserver/entity/News.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/mapper/NewsMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/trainingserver/mapper/NewsMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/service/NewsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/trainingserver/service/NewsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/service/impl/NewsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/trainingserver/service/impl/NewsServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trainingserver/entity/News.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trainingserver/entity/News.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
