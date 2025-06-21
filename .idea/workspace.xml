@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9a6afe5-5213-4f57-8f16-7204490f719f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trainingserver/TrainingServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trainingserver/TrainingServerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trainingserver/controller/NewsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/trainingserver/controller/NewsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/NewsMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/NewsMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/TrainingServerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/trainingserver/TrainingServerApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/controller/NewsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/trainingserver/controller/NewsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/entity/News.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/trainingserver/entity/News.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/mapper/NewsMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/trainingserver/mapper/NewsMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/service/NewsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/trainingserver/service/NewsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/service/impl/NewsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/trainingserver/service/impl/NewsServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/NewsMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/NewsMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/trainingserver/TrainingServerApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/trainingserver/TrainingServerApplicationTests.class" afterDir="false" />
-    </list>
+    <list default="true" id="b9a6afe5-5213-4f57-8f16-7204490f719f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,7 +79,7 @@
       <workItem from="1750182297819" duration="5000" />
       <workItem from="1750254732138" duration="2264000" />
       <workItem from="1750330179552" duration="1598000" />
-      <workItem from="1750491706080" duration="1452000" />
+      <workItem from="1750491706080" duration="1668000" />
     </task>
     <servers />
   </component>
