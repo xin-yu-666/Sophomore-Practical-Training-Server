@@ -16,8 +16,8 @@ public class NewsServiceImpl implements NewsService {
     private NewsMapper newsMapper;
 
     @Override
-    public List<News> getList(String title, String summary, String author) {
-        return newsMapper.findAll(title, summary, author);
+    public List<News> getList(String title, String summary, String author, Long userId, Integer status) {
+        return newsMapper.findAll(title, summary, author, userId, status);
     }
 
     @Override

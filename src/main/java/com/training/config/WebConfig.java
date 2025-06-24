@@ -34,6 +34,7 @@ public class WebConfig implements WebMvcConfigurer {
                     "/api/auth/verify-code",
                     "/api/captcha",
                     "/api/enterprises/public",
+                    "/api/images/**",
                     "/error"
                 );
 
@@ -46,6 +47,7 @@ public class WebConfig implements WebMvcConfigurer {
                     "/api/auth/verify-code",
                     "/api/captcha",
                     "/api/enterprises/public",
+                    "/api/images/**",
                     "/error"
                 );
     }

@@ -12,6 +12,8 @@ public class News {
     private String imageUrl;
     private String content;
     private LocalDateTime createTime;
+    private Long userId; // 发布者ID
+    private Integer status; // 0-待审核 1-已通过 2-已拒绝
 
     public Long getId() {
         return id;
@@ -67,5 +69,21 @@ public class News {
 
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 } 

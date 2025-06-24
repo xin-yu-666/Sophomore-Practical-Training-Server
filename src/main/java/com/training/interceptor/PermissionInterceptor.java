@@ -25,6 +25,11 @@ public class PermissionInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        String uri = request.getRequestURI();
+        if (uri.startsWith("/api/images/")) {
+            return true; // 放行图片访问
+        }
+
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }
@@ -61,6 +66,18 @@ public class PermissionInterceptor implements HandlerInterceptor {
 
         List<Permission> permissions = permissionMapper.findByUserId(user.getId());
         String requiredPermission = requirePermission.value();
+
+        // ====== 调试日志输出 ======
+        System.out.println("== 权限拦截器调试 ==");
+        System.out.println("token username: " + username);
+        System.out.println("user: " + user);
+        System.out.println("user id: " + (user != null ? user.getId() : "null"));
+        System.out.println("requiredPermission: " + requiredPermission);
+        System.out.println("user permissions: ");
+        for (Permission p : permissions) {
+            System.out.println("  " + p.getCode());
+        }
+        // ====== 调试日志输出 ======
 
         for (Permission permission : permissions) {
             if (permission.getCode().equals(requiredPermission)) {

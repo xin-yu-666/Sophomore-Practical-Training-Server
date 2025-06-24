@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Base64;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -70,6 +71,23 @@ public class AuthController {
             user.setEnterpriseId(enterprise.getId());
             userService.create(user);
 
+            // 注册后自动分配企业用户角色（ROLE_ENTERPRISE）
+            User createdUser = userService.findByUsername(registerDTO.getUsername());
+            if (createdUser != null) {
+                // 查找企业用户角色id
+                Long roleId = null;
+                List<com.training.entity.Role> roles = userService.findAllRoles();
+                for (com.training.entity.Role r : roles) {
+                    if ("ROLE_ENTERPRISE".equals(r.getCode())) {
+                        roleId = r.getId();
+                        break;
+                    }
+                }
+                if (roleId != null) {
+                    userService.assignRole(createdUser.getId(), roleId);
+                }
+            }
+
             logger.info("企业 {} 注册成功", registerDTO.getName());
             return Result.success();
         } catch (Exception e) {
@@ -110,6 +128,23 @@ public class AuthController {
             }
             
             userService.create(user);
+
+            // 注册后自动分配企业用户角色（ROLE_ENTERPRISE）
+            User createdUser = userService.findByUsername(registerDTO.getUsername());
+            if (createdUser != null) {
+                // 查找企业用户角色id
+                Long roleId = null;
+                List<com.training.entity.Role> roles = userService.findAllRoles();
+                for (com.training.entity.Role r : roles) {
+                    if ("ROLE_ENTERPRISE".equals(r.getCode())) {
+                        roleId = r.getId();
+                        break;
+                    }
+                }
+                if (roleId != null) {
+                    userService.assignRole(createdUser.getId(), roleId);
+                }
+            }
 
             logger.info("用户 {} 注册成功", registerDTO.getUsername());
             return Result.success();

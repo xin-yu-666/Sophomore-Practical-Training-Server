@@ -12,6 +12,8 @@
         <result property="imageUrl" column="imageUrl"/>
         <result property="content" column="content"/>
         <result property="createTime" column="createTime"/>
+        <result property="userId" column="user_id"/>
+        <result property="status" column="status"/>
     </resultMap>
 
     <select id="findAll" resultMap="newsResultMap">
@@ -26,6 +28,12 @@
             <if test="author != null and author != ''">
                 AND author LIKE CONCAT('%', #{author}, '%')
             </if>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
         </where>
         ORDER BY createTime DESC
     </select>
@@ -35,8 +43,8 @@
     </select>
 
     <insert id="insert" parameterType="com.training.entity.News">
-        INSERT INTO news (title, summary, author, imageUrl, content, createTime)
-        VALUES (#{title}, #{summary}, #{author}, #{imageUrl}, #{content}, #{createTime})
+        INSERT INTO news (title, summary, author, imageUrl, content, user_id, status, createTime)
+        VALUES (#{title}, #{summary}, #{author}, #{imageUrl}, #{content}, #{userId}, #{status}, #{createTime})
     </insert>
 
     <update id="update" parameterType="com.training.entity.News">
@@ -45,7 +53,8 @@
             summary = #{summary},
             author = #{author},
             imageUrl = #{imageUrl},
-            content = #{content}
+            content = #{content},
+            status = #{status}
         WHERE id = #{id}
     </update>
 

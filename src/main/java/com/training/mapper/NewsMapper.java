@@ -10,7 +10,9 @@ import java.util.List;
 public interface NewsMapper {
     List<News> findAll(@Param("title") String title,
                        @Param("summary") String summary,
-                       @Param("author") String author);
+                       @Param("author") String author,
+                       @Param("userId") Long userId,
+                       @Param("status") Integer status);
 
     News findById(Long id);
 

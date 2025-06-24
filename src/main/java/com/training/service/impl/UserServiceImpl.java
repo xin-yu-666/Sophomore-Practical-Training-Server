@@ -2,6 +2,7 @@ package com.training.service.impl;
 
 import com.training.entity.User;
 import com.training.mapper.UserMapper;
+import com.training.mapper.UserRoleMapper;
 import com.training.service.UserService;
 import com.training.util.JwtUtil;
 import com.training.util.PasswordUtil;
@@ -15,6 +16,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserRoleMapper userRoleMapper;
 
     @Override
     public User findByUsername(String username) {
@@ -115,5 +119,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsernameWithEnterprise(String username) {
         return userMapper.findByUsernameWithEnterprise(username);
+    }
+
+    @Override
+    public void assignRole(Long userId, Long roleId) {
+        userRoleMapper.insertUserRole(userId, roleId);
+    }
+
+    @Override
+    public List<com.training.entity.Role> findAllRoles() {
+        return userMapper.findAllRoles();
+    }
+
+    @Override
+    public List<String> findRolesByUserId(Long userId) {
+        return userMapper.findRolesByUserId(userId);
     }
 } 

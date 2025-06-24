@@ -5,6 +5,7 @@ import com.training.common.Result;
 import com.training.dto.ChangePasswordParams;
 import com.training.entity.User;
 import com.training.service.UserService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -25,19 +28,21 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/current")
-    public Result<User> getCurrentUser(HttpServletRequest request) {
+    public Result<Map<String, Object>> getCurrentUser(HttpServletRequest request) {
         String username = (String) request.getAttribute("username");
-        
         if (username == null || username.isEmpty()) {
             return Result.error("用户名不能为空");
         }
-        
         User user = userService.findByUsernameWithEnterprise(username);
         if (user != null) {
             user.setPassword(null); // 清除密码信息
         }
-        
-        return Result.success(user);
+        // 查询角色
+        List<String> roles = userService.findRolesByUserId(user.getId());
+        Map<String, Object> result = new java.util.HashMap<>();
+        result.put("user", user);
+        result.put("roles", roles);
+        return Result.success(result);
     }
 
     @PutMapping("/current")
@@ -228,19 +233,22 @@ public class UserController {
     }
 
     @GetMapping("/current/avatar")
-    public ResponseEntity<byte[]> getCurrentUserAvatar(HttpServletRequest request) {
+    public void getCurrentUserAvatar(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = (String) request.getAttribute("username");
         User user = userService.findByUsername(username);
-        
-        if (user == null || user.getAvatar() == null) {
-            return ResponseEntity.notFound().build();
+
+        response.setContentType("image/png");
+        if (user != null && user.getAvatar() != null) {
+            response.setContentType("image/jpeg");
+            response.getOutputStream().write(user.getAvatar());
+        } else {
+            // 读取默认头像
+            InputStream in = getClass().getResourceAsStream("/static/default-avatar.png");
+            if (in != null) {
+                IOUtils.copy(in, response.getOutputStream());
+            }
         }
-        
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG); // 默认为JPEG格式
-        return ResponseEntity.ok()
-                .headers(headers)
-                .body(user.getAvatar());
+        response.flushBuffer();
     }
 
     @GetMapping("/{id}/avatar")

@@ -101,4 +101,10 @@ public interface UserMapper {
                                            @Param("phone") String phone,
                                            @Param("status") Integer status,
                                            @Param("enterpriseName") String enterpriseName);
+
+    @Select("SELECT r.code FROM role r INNER JOIN user_role ur ON r.id = ur.role_id WHERE ur.user_id = #{userId}")
+    List<String> findRolesByUserId(Long userId);
+
+    @Select("SELECT * FROM role")
+    List<com.training.entity.Role> findAllRoles();
 } 
