@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.trainingserver.mapper.NewsMapper">
+<mapper namespace="com.training.mapper.NewsMapper">
 
-    <resultMap id="newsResultMap" type="com.example.trainingserver.entity.News">
+    <resultMap id="newsResultMap" type="com.training.entity.News">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="summary" column="summary"/>
@@ -34,12 +34,12 @@
         SELECT * FROM news WHERE id = #{id}
     </select>
 
-    <insert id="insert" parameterType="com.example.trainingserver.entity.News">
+    <insert id="insert" parameterType="com.training.entity.News">
         INSERT INTO news (title, summary, author, imageUrl, content, createTime)
         VALUES (#{title}, #{summary}, #{author}, #{imageUrl}, #{content}, #{createTime})
     </insert>
 
-    <update id="update" parameterType="com.example.trainingserver.entity.News">
+    <update id="update" parameterType="com.training.entity.News">
         UPDATE news
         SET title = #{title},
             summary = #{summary},
