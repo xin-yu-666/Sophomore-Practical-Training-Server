@@ -1,11 +1,13 @@
 package com.training.service.impl;
 
 import com.training.entity.User;
+import com.training.entity.UserRole;
 import com.training.mapper.UserMapper;
 import com.training.service.UserService;
 import com.training.util.JwtUtil;
 import com.training.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+    
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public User findByUsername(String username) {
@@ -42,6 +47,11 @@ public class UserServiceImpl implements UserService {
         // 加密密码
         user.setPassword(PasswordUtil.encrypt(user.getPassword()));
         userMapper.insert(user);
+        
+        // 为新用户分配企业用户角色（role_id = 2）
+        Long roleId = "admin".equals(user.getUsername()) ? 1L : 2L; // admin为超级管理员，其他为企业用户
+        jdbcTemplate.update("INSERT INTO user_role (user_id, role_id) VALUES (?, ?)", 
+                           user.getId(), roleId);
     }
 
     @Override
