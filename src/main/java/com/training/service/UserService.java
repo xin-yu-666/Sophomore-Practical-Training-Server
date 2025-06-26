@@ -1,5 +1,6 @@
 package com.training.service;
 
+import com.training.entity.Role;
 import com.training.entity.User;
 import java.util.List;
 
@@ -29,4 +30,9 @@ public interface UserService {
     void updateAvatar(String username, byte[] avatar);
     
     User findByUsernameWithEnterprise(String username);
+    void assignRole(Long userId, Long roleId);
+    
+    List<Role> findAllRoles();
+    
+    List<String> findRolesByUserId(Long userId);
 } 

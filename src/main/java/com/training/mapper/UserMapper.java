@@ -7,6 +7,11 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
+
+    @Select("SELECT r.code FROM role r INNER JOIN user_role ur ON r.id = ur.role_id WHERE ur.user_id = #{userId}")
+    List<String> findRolesByUserId(Long userId);
+
+
     @Select("SELECT id, username, password, nickname, phone, email, gender, avatar, enterprise_id, status, create_time, update_time " +
             "FROM user WHERE username = #{username}")
     User findByUsername(String username);
@@ -101,4 +106,7 @@ public interface UserMapper {
                                            @Param("phone") String phone,
                                            @Param("status") Integer status,
                                            @Param("enterpriseName") String enterpriseName);
+
+     @Select("SELECT * FROM role")
+     List<com.training.entity.Role> findAllRoles();
 } 

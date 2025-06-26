@@ -25,19 +25,21 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/current")
-    public Result<User> getCurrentUser(HttpServletRequest request) {
+    public Result<Map<String, Object>> getCurrentUser(HttpServletRequest request) {
         String username = (String) request.getAttribute("username");
-        
         if (username == null || username.isEmpty()) {
             return Result.error("用户名不能为空");
         }
-        
         User user = userService.findByUsernameWithEnterprise(username);
         if (user != null) {
             user.setPassword(null); // 清除密码信息
         }
-        
-        return Result.success(user);
+        // 查询角色
+        List<String> roles = userService.findRolesByUserId(user.getId());
+        Map<String, Object> result = new java.util.HashMap<>();
+        result.put("user", user);
+        result.put("roles", roles);
+        return Result.success(result);
     }
 
     @PutMapping("/current")
