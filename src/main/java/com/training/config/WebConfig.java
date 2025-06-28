@@ -13,6 +13,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Autowired
     private PermissionInterceptor permissionInterceptor;
 
+    @Autowired
+    private JwtInterceptor jwtInterceptor;
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
@@ -25,7 +28,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new JwtInterceptor())
+        registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/api/**")
                 .excludePathPatterns(
                     "/api/auth/login",
@@ -34,6 +37,8 @@ public class WebConfig implements WebMvcConfigurer {
                     "/api/auth/verify-code",
                     "/api/captcha",
                     "/api/enterprises/public",
+                    "/api/users/*/avatar",
+                    "/api/news/*/image",
                     "/error"
                 );
 
@@ -46,6 +51,8 @@ public class WebConfig implements WebMvcConfigurer {
                     "/api/auth/verify-code",
                     "/api/captcha",
                     "/api/enterprises/public",
+                    "/api/users/*/avatar",
+                    "/api/news/*/image",
                     "/error"
                 );
     }

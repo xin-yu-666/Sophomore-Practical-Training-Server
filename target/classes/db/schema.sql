@@ -77,6 +77,20 @@ CREATE TABLE IF NOT EXISTS role_permission (
     UNIQUE KEY uk_role_permission (role_id, permission_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='角色权限关联表';
 
+-- 创建新闻表
+DELETE FROM new;
+CREATE TABLE IF NOT EXISTS news (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(200) NOT NULL COMMENT '新闻标题',
+    summary VARCHAR(500) COMMENT '新闻简介',
+    author VARCHAR(100) COMMENT '作者',
+    imageUrl LONGBLOB COMMENT '新闻图片(BLOB存储)',
+    content TEXT COMMENT '新闻内容',
+    createTime DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    user_id BIGINT COMMENT '发布者ID',
+    status TINYINT DEFAULT 0 COMMENT '状态：0-待审核 1-已通过 2-已拒绝'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='新闻表';
+
 -- 清空并重新插入初始角色数据
 DELETE FROM role;
 INSERT INTO role (name, code, description) VALUES 

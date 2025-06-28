@@ -9,7 +9,7 @@
         <result property="title" column="title"/>
         <result property="summary" column="summary"/>
         <result property="author" column="author"/>
-        <result property="imageUrl" column="imageUrl"/>
+        <result property="imageUrl" column="imageUrl" jdbcType="BLOB"/>
         <result property="content" column="content"/>
         <result property="createTime" column="createTime"/>
         <result property="userId" column="user_id"/>
@@ -42,19 +42,21 @@
         SELECT * FROM news WHERE id = #{id}
     </select>
 
-    <insert id="insert" parameterType="com.training.entity.News">
+    <insert id="insert" parameterType="com.training.entity.News" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO news (title, summary, author, imageUrl, content, user_id, status, createTime)
-        VALUES (#{title}, #{summary}, #{author}, #{imageUrl}, #{content}, #{userId}, #{status}, #{createTime})
+        VALUES (#{title}, #{summary}, #{author}, #{imageUrl,jdbcType=BLOB}, #{content}, #{userId}, #{status}, #{createTime})
     </insert>
 
     <update id="update" parameterType="com.training.entity.News">
         UPDATE news
-        SET title = #{title},
+        <set>
+            title = #{title},
             summary = #{summary},
             author = #{author},
-            imageUrl = #{imageUrl},
+            <if test="imageUrl != null">imageUrl = #{imageUrl,jdbcType=BLOB},</if>
             content = #{content},
             status = #{status}
+        </set>
         WHERE id = #{id}
     </update>
 

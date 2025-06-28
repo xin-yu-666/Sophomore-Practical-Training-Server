@@ -117,6 +117,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void updateAvatar(String username, byte[] avatar) {
+//        System.out.println("updateAvatar username = " + username);
         User user = userMapper.findByUsername(username);
         if (user == null) {
             throw new RuntimeException("用户不存在");

@@ -207,39 +207,41 @@ public class UserController {
 
     @PostMapping("/current/avatar")
     @RequirePermission("PROFILE_MANAGE")
-    public Result<Void> uploadAvatar(@RequestParam("avatar") MultipartFile file, 
-                                   HttpServletRequest request) throws IOException {
-        String username = (String) request.getAttribute("username");
+    public Result<Void> uploadAvatar(@RequestParam("avatar") MultipartFile file, HttpServletRequest request) throws IOException {
+        String token = request.getHeader("Authorization");
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+        String username = com.training.util.JwtUtil.getUsernameFromToken(token);
         if (file.isEmpty()) {
             return Result.error("请选择要上传的头像文件");
         }
-        
         // 检查文件类型
         String contentType = file.getContentType();
         if (contentType == null || !contentType.startsWith("image/")) {
             return Result.error("只允许上传图片文件");
         }
-        
         // 检查文件大小 (限制为2MB)
         if (file.getSize() > 2 * 1024 * 1024) {
             return Result.error("头像文件大小不能超过2MB");
         }
-        
         userService.updateAvatar(username, file.getBytes());
         return Result.success();
     }
 
     @GetMapping("/current/avatar")
     public ResponseEntity<byte[]> getCurrentUserAvatar(HttpServletRequest request) {
-        String username = (String) request.getAttribute("username");
+        String token = request.getHeader("Authorization");
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+        String username = com.training.util.JwtUtil.getUsernameFromToken(token);
         User user = userService.findByUsername(username);
-        
         if (user == null || user.getAvatar() == null) {
             return ResponseEntity.notFound().build();
         }
-        
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG); // 默认为JPEG格式
+        headers.setContentType(org.springframework.http.MediaType.IMAGE_JPEG); // 默认为JPEG格式
         return ResponseEntity.ok()
                 .headers(headers)
                 .body(user.getAvatar());

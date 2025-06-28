@@ -2,6 +2,7 @@ package com.training.entity;
 
 import lombok.Data;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 public class News {
@@ -9,7 +10,8 @@ public class News {
     private String title;
     private String summary;
     private String author;
-    private String imageUrl;
+    @JsonIgnore
+    private byte[] imageUrl;
     private String content;
     private LocalDateTime createTime;
     private Long userId; // 发布者ID
@@ -47,11 +49,11 @@ public class News {
         this.author = author;
     }
 
-    public String getImageUrl() {
+    public byte[] getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public void setImageUrl(byte[] imageUrl) {
         this.imageUrl = imageUrl;
     }
 

@@ -3,6 +3,9 @@ package com.training.controller;
 import com.training.entity.News;
 import com.training.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,11 +18,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import com.training.annotation.RequirePermission;
 import javax.servlet.http.HttpServletRequest;
 import com.training.mapper.UserMapper;
 import com.training.entity.User;
+import com.training.common.Result;
+import org.springframework.http.HttpStatus;
+import com.training.dto.NewsDTO;
 
 @RestController
 @RequestMapping("/api")
@@ -51,12 +58,13 @@ public class NewsController {
             
             // 写入数据
             for (News news : newsList) {
+                String imageInfo = news.getImageUrl() != null ? "[图片]" : "";
                 String line = String.format("%d,\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"\n",
                     news.getId(),
                     news.getTitle() != null ? news.getTitle().replace("\"", "\"\"") : "",
                     news.getSummary() != null ? news.getSummary().replace("\"", "\"\"") : "",
                     news.getAuthor() != null ? news.getAuthor().replace("\"", "\"\"") : "",
-                    news.getImageUrl() != null ? news.getImageUrl().replace("\"", "\"\"") : "",
+                    imageInfo,
                     news.getContent() != null ? news.getContent().replace("\"", "\"\"") : "",
                     news.getCreateTime() != null ? news.getCreateTime().toString() : ""
                 );
@@ -70,85 +78,6 @@ public class NewsController {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write("导出失败: " + e.getMessage());
         }
-    }
-
-    // 图片上传接口
-    @PostMapping("/upload")
-    public Map<String, Object> uploadImage(@RequestParam("file") MultipartFile file) {
-        try {
-            // 检查文件是否为空
-            if (file.isEmpty()) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("success", false);
-                map.put("message", "请选择要上传的图片");
-                return map;
-            }
-
-            // 检查文件类型
-            String contentType = file.getContentType();
-            if (contentType == null || (!contentType.equals("image/jpeg") && !contentType.equals("image/png"))) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("success", false);
-                map.put("message", "只支持jpg/png格式的图片");
-                return map;
-            }
-
-            // 检查文件大小（2MB）
-            if (file.getSize() > 2 * 1024 * 1024) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("success", false);
-                map.put("message", "图片大小不能超过2MB");
-                return map;
-            }
-
-            // 创建上传目录
-            String uploadDir = "uploads/images/";
-            File dir = new File(uploadDir);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-
-            // 生成唯一文件名
-            String originalFilename = file.getOriginalFilename();
-            String extension = "";
-            if (originalFilename != null && originalFilename.lastIndexOf(".") != -1) {
-                extension = originalFilename.substring(originalFilename.lastIndexOf("."));
-            } else {
-                Map<String, Object> map = new HashMap<>();
-                map.put("success", false);
-                map.put("message", "文件名无效，缺少扩展名");
-                return map;
-            }
-            String filename = System.currentTimeMillis() + extension;
-            
-            // 保存文件，若已存在则覆盖
-            Path filePath = Paths.get(uploadDir + filename);
-            Files.copy(file.getInputStream(), filePath, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-
-            // 返回图片访问URL
-            String imageUrl = "/api/images/" + filename;
-            Map<String, Object> map = new HashMap<>();
-            map.put("success", true);
-            map.put("url", imageUrl);
-            map.put("message", "图片上传成功");
-            return map;
-            
-        } catch (IOException e) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("success", false);
-            map.put("message", "图片上传失败: " + e.getMessage());
-            return map;
-        }
-    }
-
-    // 图片访问接口
-    @GetMapping("/images/{filename}")
-    public byte[] getImage(@PathVariable String filename) throws IOException {
-        Path imagePath = Paths.get("uploads/images/" + filename);
-        if (Files.exists(imagePath)) {
-            return Files.readAllBytes(imagePath);
-        }
-        return new byte[0];
     }
 
     @GetMapping("/news/test")
@@ -207,7 +136,7 @@ public class NewsController {
                 }
             }
             Map<String, Object> data = new HashMap<>();
-            data.put("list", list);
+            data.put("list", list.stream().map(this::toDTO).collect(Collectors.toList()));
             data.put("total", list.size());
             Map<String, Object> map = new HashMap<>();
             map.put("success", true);
@@ -251,19 +180,20 @@ public class NewsController {
             return map;
         }
         map.put("success", true);
-        map.put("data", news);
+        map.put("data", toDTO(news));
         return map;
     }
 
     @PostMapping("/news")
     @RequirePermission("NEWS_PUBLISH")
-    public Map<String, Object> add(@RequestBody News news, HttpServletRequest request) {
+    public Map<String, Object> add(@RequestBody NewsDTO newsDTO, HttpServletRequest request) {
         String token = request.getHeader("Authorization");
         if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7);
         }
         String username = com.training.util.JwtUtil.getUsernameFromToken(token);
         User user = userMapper.findByUsername(username);
+        News news = dtoToEntity(newsDTO);
         news.setUserId(user.getId());
         List<String> roles = userMapper.findRolesByUserId(user.getId());
         boolean isAdmin = false;
@@ -277,12 +207,13 @@ public class NewsController {
         boolean ok = newsService.add(news);
         Map<String, Object> map = new HashMap<>();
         map.put("success", ok);
+        map.put("data", toDTO(news));
         return map;
     }
 
     @PutMapping("/news/{id}")
     @RequirePermission("NEWS_EDIT")
-    public Map<String, Object> update(@PathVariable Long id, @RequestBody News news, HttpServletRequest request) {
+    public Map<String, Object> update(@PathVariable Long id, @RequestBody NewsDTO newsDTO, HttpServletRequest request) {
         String token = request.getHeader("Authorization");
         if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7);
@@ -310,12 +241,14 @@ public class NewsController {
             map.put("message", "无权编辑该新闻");
             return map;
         }
+        News news = dtoToEntity(newsDTO);
         news.setId(id);
         news.setUserId(old.getUserId());
         news.setStatus(old.getStatus());
         boolean ok = newsService.update(news);
         Map<String, Object> map = new HashMap<>();
         map.put("success", ok);
+        map.put("data", toDTO(news));
         return map;
     }
 
@@ -424,7 +357,70 @@ public class NewsController {
         }
         List<News> list = newsService.getList(null, null, null, null, 0);
         map.put("success", true);
-        map.put("data", list);
+        map.put("data", list.stream().map(this::toDTO).collect(Collectors.toList()));
         return map;
+    }
+
+    @PostMapping("/news/{id}/image")
+    @RequirePermission("NEWS_EDIT")
+    public Result<Void> uploadNewsImage(@PathVariable Long id, @RequestParam("image") MultipartFile file) throws IOException {
+        if (file.isEmpty()) {
+            return Result.error("请选择要上传的图片文件");
+        }
+        String contentType = file.getContentType();
+        if (contentType == null || !contentType.startsWith("image/")) {
+            return Result.error("只允许上传图片文件");
+        }
+        if (file.getSize() > 2 * 1024 * 1024) {
+            return Result.error("图片文件大小不能超过2MB");
+        }
+        News news = newsService.getById(id);
+        if (news == null) {
+            return Result.error("新闻不存在");
+        }
+        news.setImageUrl(file.getBytes());
+        newsService.update(news);
+        return Result.success();
+    }
+
+    @GetMapping("/news/{id}/image")
+    public ResponseEntity<byte[]> getNewsImage(@PathVariable Long id) {
+        News news = newsService.getById(id);
+        if (news == null || news.getImageUrl() == null) {
+            return ResponseEntity.notFound().build();
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG); // 默认为JPEG格式
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(news.getImageUrl());
+    }
+
+    private NewsDTO toDTO(News news) {
+        if (news == null) return null;
+        NewsDTO dto = new NewsDTO();
+        dto.setId(news.getId());
+        dto.setTitle(news.getTitle());
+        dto.setSummary(news.getSummary());
+        dto.setAuthor(news.getAuthor());
+        dto.setContent(news.getContent());
+        dto.setCreateTime(news.getCreateTime());
+        dto.setUserId(news.getUserId());
+        dto.setStatus(news.getStatus());
+        return dto;
+    }
+
+    private News dtoToEntity(NewsDTO dto) {
+        if (dto == null) return null;
+        News news = new News();
+        news.setId(dto.getId());
+        news.setTitle(dto.getTitle());
+        news.setSummary(dto.getSummary());
+        news.setAuthor(dto.getAuthor());
+        news.setContent(dto.getContent());
+        news.setCreateTime(dto.getCreateTime());
+        news.setUserId(dto.getUserId());
+        news.setStatus(dto.getStatus());
+        return news;
     }
 } 
