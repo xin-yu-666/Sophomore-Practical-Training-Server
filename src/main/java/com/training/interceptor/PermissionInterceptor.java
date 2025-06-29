@@ -37,6 +37,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 
         String token = request.getHeader("Authorization");
         if (token == null || token.isEmpty()) {
+            System.out.println("权限检查失败：无Authorization头");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return false;
         }
@@ -48,6 +49,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 
         String username = JwtUtil.getUsernameFromToken(token);
         if (username == null) {
+            System.out.println("权限检查失败：无法从token获取用户名");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return false;
         }
@@ -55,19 +57,33 @@ public class PermissionInterceptor implements HandlerInterceptor {
         // 根据用户名查找用户ID
         User user = userMapper.findByUsername(username);
         if (user == null) {
+            System.out.println("权限检查失败：用户不存在 - " + username);
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return false;
         }
 
-        List<Permission> permissions = permissionMapper.findByUserId(user.getId());
         String requiredPermission = requirePermission.value();
+        System.out.println("检查用户 " + username + " 是否有权限: " + requiredPermission);
 
-        for (Permission permission : permissions) {
-            if (permission.getCode().equals(requiredPermission)) {
-                return true;
+        try {
+            List<Permission> permissions = permissionMapper.findByUserId(user.getId());
+            System.out.println("用户 " + username + " 拥有的权限数量: " + (permissions != null ? permissions.size() : 0));
+            
+            if (permissions != null) {
+                for (Permission permission : permissions) {
+                    System.out.println("用户权限: " + permission.getCode());
+                    if (permission.getCode().equals(requiredPermission)) {
+                        System.out.println("权限检查通过");
+                        return true;
+                    }
+                }
             }
+        } catch (Exception e) {
+            System.err.println("权限检查异常: " + e.getMessage());
+            e.printStackTrace();
         }
 
+        System.out.println("权限检查失败：用户 " + username + " 没有权限 " + requiredPermission);
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         return false;
     }

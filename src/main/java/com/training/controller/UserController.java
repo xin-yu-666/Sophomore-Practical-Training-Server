@@ -109,9 +109,19 @@ public class UserController {
     @PutMapping("/{id}")
     @RequirePermission("USER_MANAGE")
     public Result<Void> update(@PathVariable Long id, @Valid @RequestBody User user) {
-        user.setId(id);
-        userService.update(user);
-        return Result.success();
+        try {
+            System.out.println("收到更新用户请求 - ID: " + id);
+            System.out.println("请求体: " + user);
+            
+            user.setId(id);
+            userService.update(user);
+            System.out.println("用户更新成功 - ID: " + id);
+            return Result.success();
+        } catch (Exception e) {
+            System.err.println("更新用户失败 - ID: " + id + ", 错误: " + e.getMessage());
+            e.printStackTrace();
+            return Result.error("更新用户失败: " + e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
@@ -123,16 +133,36 @@ public class UserController {
 
     @DeleteMapping("/batch")
     @RequirePermission("USER_MANAGE")
-    public Result<Void> batchDelete(@RequestBody Map<String, List<Long>> request) {
-        List<Long> ids = request.get("ids");
-        if (ids == null || ids.isEmpty()) {
-            return Result.error("请选择要删除的用户");
+    public Result<Void> batchDelete(@RequestBody Map<String, Object> request) {
+        try {
+            @SuppressWarnings("unchecked")
+            List<Object> rawIds = (List<Object>) request.get("ids");
+            
+            if (rawIds == null || rawIds.isEmpty()) {
+                return Result.error("请选择要删除的用户");
+            }
+            
+            // 转换ID类型，兼容前端传递的number类型
+            for (Object rawId : rawIds) {
+                Long id;
+                if (rawId instanceof Integer) {
+                    id = ((Integer) rawId).longValue();
+                } else if (rawId instanceof Long) {
+                    id = (Long) rawId;
+                } else if (rawId instanceof String) {
+                    id = Long.parseLong((String) rawId);
+                } else {
+                    id = Long.valueOf(rawId.toString());
+                }
+                
+                userService.deleteById(id);
+            }
+            return Result.success();
+        } catch (Exception e) {
+            System.err.println("批量删除用户失败: " + e.getMessage());
+            e.printStackTrace();
+            return Result.error("批量删除用户失败: " + e.getMessage());
         }
-        
-        for (Long id : ids) {
-            userService.deleteById(id);
-        }
-        return Result.success();
     }
 
     @PutMapping("/{id}/status")
@@ -156,25 +186,73 @@ public class UserController {
     @PutMapping("/batch/status")
     @RequirePermission("USER_MANAGE")
     public Result<Void> batchUpdateStatus(@RequestBody Map<String, Object> request) {
-        @SuppressWarnings("unchecked")
-        List<Long> ids = (List<Long>) request.get("ids");
-        Integer status = (Integer) request.get("status");
-        
-        if (ids == null || ids.isEmpty()) {
-            return Result.error("请选择要修改的用户");
-        }
-        if (status == null) {
-            return Result.error("状态值不能为空");
-        }
-        
-        for (Long id : ids) {
-            User user = userService.findById(id);
-            if (user != null) {
-                user.setStatus(status);
-                userService.update(user);
+        try {
+            System.out.println("收到批量修改状态请求: " + request);
+            
+            @SuppressWarnings("unchecked")
+            List<Object> rawIds = (List<Object>) request.get("ids");
+            Integer status = (Integer) request.get("status");
+            
+            System.out.println("解析的IDs: " + rawIds);
+            System.out.println("解析的状态: " + status);
+            
+            if (rawIds == null || rawIds.isEmpty()) {
+                return Result.error("请选择要修改的用户");
             }
+            if (status == null) {
+                return Result.error("状态值不能为空");
+            }
+            
+            int successCount = 0;
+            int failCount = 0;
+            
+            // 转换ID类型，兼容前端传递的number类型
+            for (Object rawId : rawIds) {
+                try {
+                    Long id;
+                    if (rawId instanceof Integer) {
+                        id = ((Integer) rawId).longValue();
+                    } else if (rawId instanceof Long) {
+                        id = (Long) rawId;
+                    } else if (rawId instanceof String) {
+                        id = Long.parseLong((String) rawId);
+                    } else {
+                        id = Long.valueOf(rawId.toString());
+                    }
+                    
+                    System.out.println("处理用户ID: " + id);
+                    
+                    User user = userService.findById(id);
+                    if (user != null) {
+                        System.out.println("找到用户: " + user.getUsername() + ", 当前状态: " + user.getStatus());
+                        user.setStatus(status);
+                        userService.update(user);
+                        successCount++;
+                        System.out.println("用户 " + user.getUsername() + " 状态修改成功");
+                    } else {
+                        System.out.println("用户ID " + id + " 不存在");
+                        failCount++;
+                    }
+                } catch (Exception e) {
+                    System.err.println("处理用户ID " + rawId + " 时发生错误: " + e.getMessage());
+                    e.printStackTrace();
+                    failCount++;
+                }
+            }
+            
+            System.out.println("批量修改完成: 成功" + successCount + "个, 失败" + failCount + "个");
+            
+            if (failCount > 0 && successCount == 0) {
+                return Result.error("批量修改失败");
+            } else if (failCount > 0) {
+                System.out.println("部分修改成功: 成功" + successCount + "个, 失败" + failCount + "个");
+            }
+            return Result.success();
+        } catch (Exception e) {
+            System.err.println("批量修改用户状态失败: " + e.getMessage());
+            e.printStackTrace();
+            return Result.error("批量修改用户状态失败: " + e.getMessage());
         }
-        return Result.success();
     }
 
     @PutMapping("/{id}/password")

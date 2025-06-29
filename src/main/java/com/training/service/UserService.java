@@ -27,6 +27,8 @@ public interface UserService {
     
     void updatePassword(Long userId, String oldPassword, String newPassword);
     
+    void resetPassword(String username, String newPassword);
+    
     void updateAvatar(String username, byte[] avatar);
     
     User findByUsernameWithEnterprise(String username);

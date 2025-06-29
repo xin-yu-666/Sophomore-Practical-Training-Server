@@ -116,6 +116,72 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public void resetPassword(String username, String newPassword) {
+        // 参数验证
+        if (username == null || username.trim().isEmpty()) {
+            throw new RuntimeException("用户名不能为空");
+        }
+        
+        if (newPassword == null || newPassword.trim().isEmpty()) {
+            throw new RuntimeException("新密码不能为空");
+        }
+        
+        if (newPassword.length() < 6 || newPassword.length() > 20) {
+            throw new RuntimeException("密码长度必须在6-20个字符之间");
+        }
+        
+        // 日志记录
+        System.out.println("开始重置密码 - 用户名: " + username.trim());
+        System.out.println("新密码长度: " + newPassword.length());
+        
+        User user = userMapper.findByUsername(username.trim());
+        if (user == null) {
+            System.out.println("用户查找失败 - 用户名: " + username.trim());
+            throw new RuntimeException("用户名不存在，请检查用户名是否正确");
+        }
+        
+        System.out.println("找到用户 - ID: " + user.getId() + ", 用户名: " + user.getUsername());
+        System.out.println("当前密码: " + user.getPassword());
+
+        if (user.getStatus() == 0) {
+            System.out.println("用户状态异常 - 状态: " + user.getStatus());
+            throw new RuntimeException("账号已被禁用，无法重置密码");
+        }
+
+        // 加密新密码
+        String encryptedPassword = PasswordUtil.encrypt(newPassword);
+        System.out.println("加密后的新密码: " + encryptedPassword);
+        
+        String oldPassword = user.getPassword();
+        user.setPassword(encryptedPassword);
+        
+        // 更新数据库
+        System.out.println("开始更新数据库...");
+        int updateResult = userMapper.update(user);
+        System.out.println("数据库更新结果: " + updateResult);
+        
+        if (updateResult <= 0) {
+            System.out.println("数据库更新失败!");
+            throw new RuntimeException("密码更新失败，请稍后重试");
+        }
+        
+        // 验证更新结果
+        User updatedUser = userMapper.findByUsername(username.trim());
+        System.out.println("更新后的密码: " + updatedUser.getPassword());
+        
+        if (!encryptedPassword.equals(updatedUser.getPassword())) {
+            System.out.println("密码更新验证失败!");
+            System.out.println("期望密码: " + encryptedPassword);
+            System.out.println("实际密码: " + updatedUser.getPassword());
+            throw new RuntimeException("密码更新验证失败");
+        }
+        
+        System.out.println("用户 " + username + " 密码重置成功");
+        System.out.println("原密码: " + oldPassword + " -> 新密码: " + encryptedPassword);
+    }
+
+    @Override
+    @Transactional
     public void updateAvatar(String username, byte[] avatar) {
 //        System.out.println("updateAvatar username = " + username);
         User user = userMapper.findByUsername(username);
