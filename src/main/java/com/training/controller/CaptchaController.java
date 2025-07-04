@@ -1,6 +1,7 @@
 package com.training.controller;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +17,11 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/api/captcha")
 public class CaptchaController {
-    private final DefaultKaptcha defaultKaptcha;
-    private final StringRedisTemplate redisTemplate;
+    @Autowired
+    private DefaultKaptcha defaultKaptcha;
 
-    public CaptchaController(DefaultKaptcha defaultKaptcha, StringRedisTemplate redisTemplate) {
-        this.defaultKaptcha = defaultKaptcha;
-        this.redisTemplate = redisTemplate;
-    }
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     @GetMapping
     public void getCaptcha(HttpServletResponse response) throws Exception {

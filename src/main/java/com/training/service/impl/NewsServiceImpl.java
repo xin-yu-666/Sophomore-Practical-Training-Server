@@ -40,4 +40,13 @@ public class NewsServiceImpl implements NewsService {
     public boolean delete(Long id) {
         return newsMapper.delete(id) > 0;
     }
+
+    @Override
+    public void updateImage(Long id, byte[] imageBytes) {
+        News news = newsMapper.findById(id);
+        if (news != null) {
+            news.setImageUrl(imageBytes);
+            newsMapper.update(news);
+        }
+    }
 } 

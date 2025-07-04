@@ -10,4 +10,5 @@ public interface NewsService {
     boolean add(News news);
     boolean update(News news);
     boolean delete(Long id);
+    void updateImage(Long id, byte[] imageBytes);
 } 

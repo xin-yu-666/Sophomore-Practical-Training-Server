@@ -1,10 +1,12 @@
 package com.training.interceptor;
 
 import com.training.util.JwtUtil;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Component
 public class JwtInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -38,6 +40,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         if (username != null) {
             request.setAttribute("username", username);
         }
+//        System.out.println("JwtInterceptor username = " + username);
 
         return true;
     }

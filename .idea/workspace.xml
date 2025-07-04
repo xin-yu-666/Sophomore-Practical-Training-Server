@@ -4,85 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9a6afe5-5213-4f57-8f16-7204490f719f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/default-avatar.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="be78f1eb-9e0b-44d4-9a48-7241c0a59fb9" name="变更" comment="变更">
+      <change afterPath="$PROJECT_DIR$/libs/kingbase8-9.0.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trainingserver/TrainingServerApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trainingserver/controller/NewsController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trainingserver/entity/News.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trainingserver/mapper/NewsMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trainingserver/service/NewsService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/trainingserver/service/impl/NewsServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/training/TrainingServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/training/TrainingServerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/training/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/training/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/training/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/training/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/training/controller/CaptchaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/training/controller/CaptchaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/training/controller/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/training/controller/CourseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/training/controller/NewsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/training/controller/NewsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/training/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/training/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/training/entity/News.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/training/entity/News.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/training/interceptor/PermissionInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/training/interceptor/PermissionInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/training/mapper/NewsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/training/mapper/NewsMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/training/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/training/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/training/service/NewsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/training/service/NewsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/training/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/training/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/training/service/impl/NewsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/training/service/impl/NewsServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/training/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/training/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/NewsMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/NewsMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/trainingserver/TrainingServerApplicationTests.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/TrainingServerApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/controller/NewsController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/entity/News.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/mapper/NewsMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/service/NewsService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/trainingserver/service/impl/NewsServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/TrainingServerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/TrainingServerApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/annotation/RequirePermission.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/annotation/RequirePermission.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/common/Result.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/common/Result.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/config/WebConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/config/WebConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/controller/AuthController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/controller/CaptchaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/controller/CaptchaController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/controller/EnterpriseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/controller/EnterpriseController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/training/controller/CourseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/controller/CourseController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/training/controller/NewsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/controller/NewsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/dto/ChangePasswordParams.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/dto/ChangePasswordParams.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/dto/EnterpriseRegisterDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/dto/EnterpriseRegisterDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/dto/LoginDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/dto/LoginDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/dto/UserRegisterDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/dto/UserRegisterDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/entity/Enterprise.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/entity/Enterprise.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/entity/Industry.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/entity/Industry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/entity/News.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/entity/News.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/entity/Permission.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/entity/Permission.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/entity/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/entity/Role.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/entity/RolePermission.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/entity/RolePermission.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/entity/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/entity/UserRole.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/entity/UserRole.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/interceptor/JwtInterceptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/interceptor/JwtInterceptor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/interceptor/PermissionInterceptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/interceptor/PermissionInterceptor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/mapper/EnterpriseMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/mapper/EnterpriseMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/mapper/IndustryMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/mapper/IndustryMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/mapper/NewsMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/mapper/NewsMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/mapper/PermissionMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/mapper/PermissionMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/training/mapper/UserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/mapper/UserMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/service/EnterpriseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/service/EnterpriseService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/service/IndustryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/service/IndustryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/service/NewsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/service/NewsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/service/impl/EnterpriseServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/service/impl/EnterpriseServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/service/impl/NewsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/service/impl/NewsServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/service/impl/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/util/CaptchaUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/util/CaptchaUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/util/JwtUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/util/JwtUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/training/util/PasswordUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/training/util/PasswordUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/db/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/NewsMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/NewsMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/trainingserver/TrainingServerApplicationTests.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,65 +25,83 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
-        <option value="spring-beans.schema" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/training/entity/Meeting.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/training/service/MeetingService.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
-  <component name="ProjectId" id="2yZXnouCLL2P58lhM99h8Lw1rWS" />
+  <component name="ProjectId" id="2zDgODDHSW53gp98zh4mzqbusyJ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="DatabaseDriversLRU" value="mysql&#10;java.sql.Driver" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="import_schema_mapping" value="&lt;schema-mapping&gt;&lt;databases&gt;&lt;list&gt;&lt;schema-mapping-item&gt;&lt;source-data-source-id&gt;1d346f96-bd48-43ec-91ab-7910c123a206&lt;/source-data-source-id&gt;&lt;source-path&gt;schema/&quot;training&quot;&lt;/source-path&gt;&lt;target-data-source-id&gt;1bfed205-6676-40cf-a07d-77e1fd6749ac&lt;/target-data-source-id&gt;&lt;target-path&gt;schema/&quot;training_server&quot;&lt;/target-path&gt;&lt;/schema-mapping-item&gt;&lt;/list&gt;&lt;/databases&gt;&lt;/schema-mapping&gt;" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/uploads/images/1750744088810.png" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/uploads/images/1750744088810.png" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\ideadata\Sophomore-Practical-Training-Server\src\main\resources\static" />
+      <recent name="D:\ideadata\Sophomore-Practical-Training-Server\libs" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.training.test" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.TrainingServerApplication">
-    <configuration name="schema.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
-      <script-file value="$PROJECT_DIR$/src/main/resources/db/schema.sql" />
-      <script-mode>FILE</script-mode>
-      <method v="2" />
-    </configuration>
-    <configuration name="TrainingServerApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <configuration name="MeetingControllerTest.getMeetingList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="training-server" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.training.TrainingServerApplication" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.training.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.training.test" />
+      <option name="MAIN_CLASS_NAME" value="com.training.test.MeetingControllerTest" />
+      <option name="METHOD_NAME" value="getMeetingList" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="training-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.training.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.training.test" />
+      <option name="MAIN_CLASS_NAME" value="com.training.test.UserControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -158,41 +109,32 @@
     <configuration name="TrainingServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="training-server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.training.TrainingServerApplication" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Spring Boot.TrainingServerApplication" />
-      <item itemvalue="Spring Boot.TrainingServerApplication (1)" />
-      <item itemvalue="Database Script.schema.sql" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Database Script.schema.sql" />
+        <item itemvalue="JUnit.UserControllerTest" />
+        <item itemvalue="JUnit.MeetingControllerTest.getMeetingList" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="b9a6afe5-5213-4f57-8f16-7204490f719f" name="Changes" comment="" />
-      <created>1750043240309</created>
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="be78f1eb-9e0b-44d4-9a48-7241c0a59fb9" name="变更" comment="" />
+      <created>1751271024661</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1750043240309</updated>
-      <workItem from="1750043241782" duration="46000" />
-      <workItem from="1750054282571" duration="82000" />
-      <workItem from="1750156172427" duration="7377000" />
-      <workItem from="1750175739987" duration="20000" />
-      <workItem from="1750181778596" duration="21000" />
-      <workItem from="1750182297819" duration="5000" />
-      <workItem from="1750254732138" duration="2264000" />
-      <workItem from="1750330179552" duration="1598000" />
-      <workItem from="1750491706080" duration="1668000" />
-      <workItem from="1750736259128" duration="1483000" />
-      <workItem from="1750737782259" duration="17673000" />
+      <updated>1751271024661</updated>
+      <workItem from="1751271027711" duration="783000" />
+      <workItem from="1751287936820" duration="259000" />
+      <workItem from="1751444245782" duration="5877000" />
+      <workItem from="1751523958109" duration="1510000" />
+      <workItem from="1751525508326" duration="1516000" />
+      <workItem from="1751527098294" duration="195000" />
+      <workItem from="1751527321948" duration="4580000" />
     </task>
     <servers />
   </component>

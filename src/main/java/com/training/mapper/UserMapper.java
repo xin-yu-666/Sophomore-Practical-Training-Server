@@ -7,12 +7,17 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
+
+    @Select("SELECT r.code FROM role r INNER JOIN user_role ur ON r.id = ur.role_id WHERE ur.user_id = #{userId}")
+    List<String> findRolesByUserId(Long userId);
+
+
     @Select("SELECT id, username, password, nickname, phone, email, gender, avatar, enterprise_id, status, create_time, update_time " +
-            "FROM user WHERE username = #{username}")
+            "FROM \"user\" WHERE username = #{username}")
     User findByUsername(String username);
 
     @Select("SELECT u.id, u.username, u.password, u.nickname, u.phone, u.email, u.gender, u.avatar, u.enterprise_id, u.status, u.create_time, u.update_time, e.name as enterprise_name " +
-            "FROM user u " +
+            "FROM \"user\" u " +
             "LEFT JOIN enterprise e ON u.enterprise_id = e.id " +
             "WHERE u.username = #{username}")
     @Results({
@@ -21,24 +26,24 @@ public interface UserMapper {
     User findByUsernameWithEnterprise(String username);
     
     @Select("SELECT id, username, password, nickname, phone, email, gender, avatar, enterprise_id, status, create_time, update_time " +
-            "FROM user WHERE id = #{id}")
+            "FROM \"user\" WHERE id = #{id}")
     User findById(Long id);
     
     @Select("SELECT id, username, password, nickname, phone, email, gender, avatar, enterprise_id, status, create_time, update_time " +
-            "FROM user")
+            "FROM \"user\"")
     List<User> findAll();
     
     @Select("SELECT id, username, password, nickname, phone, email, gender, avatar, enterprise_id, status, create_time, update_time " +
-            "FROM user WHERE enterprise_id = #{enterpriseId}")
+            "FROM \"user\" WHERE enterprise_id = #{enterpriseId}")
     List<User> findByEnterpriseId(Long enterpriseId);
     
-    @Insert("INSERT INTO user (username, password, nickname, phone, email, gender, avatar, enterprise_id, status) " +
+    @Insert("INSERT INTO \"user\" (username, password, nickname, phone, email, gender, avatar, enterprise_id, status) " +
             "VALUES (#{username}, #{password}, #{nickname}, #{phone}, #{email}, #{gender}, #{avatar}, #{enterpriseId}, #{status})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(User user);
     
     @Update("<script>" +
-            "UPDATE user " +
+            "UPDATE \"user\" " +
             "<set>" +
             "  <if test='password != null'>password = #{password},</if>" +
             "  <if test='nickname != null'>nickname = #{nickname},</if>" +
@@ -53,12 +58,12 @@ public interface UserMapper {
             "</script>")
     int update(User user);
     
-    @Delete("DELETE FROM user WHERE id = #{id}")
+    @Delete("DELETE FROM \"user\" WHERE id = #{id}")
     int deleteById(Long id);
     
     @Select("<script>" +
             "SELECT id, username, password, nickname, phone, email, gender, avatar, enterprise_id, status, create_time, update_time " +
-            "FROM user " +
+            "FROM \"user\" " +
             "<where>" +
             "  <if test='username != null and username != \"\"'>" +
             "    AND username LIKE CONCAT('%', #{username}, '%')" +
@@ -77,7 +82,7 @@ public interface UserMapper {
 
     @Select("<script>" +
             "SELECT u.id, u.username, u.password, u.nickname, u.phone, u.email, u.gender, u.avatar, u.enterprise_id, u.status, u.create_time, u.update_time, e.name as enterprise_name " +
-            "FROM user u " +
+            "FROM \"user\" u " +
             "LEFT JOIN enterprise e ON u.enterprise_id = e.id " +
             "<where>" +
             "  <if test='username != null and username != \"\"'>" +
@@ -102,9 +107,6 @@ public interface UserMapper {
                                            @Param("status") Integer status,
                                            @Param("enterpriseName") String enterpriseName);
 
-    @Select("SELECT r.code FROM role r INNER JOIN user_role ur ON r.id = ur.role_id WHERE ur.user_id = #{userId}")
-    List<String> findRolesByUserId(Long userId);
-
-    @Select("SELECT * FROM role")
-    List<com.training.entity.Role> findAllRoles();
+     @Select("SELECT * FROM role")
+     List<com.training.entity.Role> findAllRoles();
 } 

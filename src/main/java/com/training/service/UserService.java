@@ -1,7 +1,7 @@
 package com.training.service;
 
-import com.training.entity.User;
 import com.training.entity.Role;
+import com.training.entity.User;
 import java.util.List;
 
 public interface UserService {
@@ -27,10 +27,11 @@ public interface UserService {
     
     void updatePassword(Long userId, String oldPassword, String newPassword);
     
+    void resetPassword(String username, String newPassword);
+    
     void updateAvatar(String username, byte[] avatar);
     
     User findByUsernameWithEnterprise(String username);
-    
     void assignRole(Long userId, Long roleId);
     
     List<Role> findAllRoles();
