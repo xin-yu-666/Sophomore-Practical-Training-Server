@@ -32,12 +32,18 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     @Override
     @Transactional
     public void create(Enterprise enterprise) {
+        if (enterprise == null) {
+            throw new NullPointerException("参数不能为空");
+        }
         enterpriseMapper.insert(enterprise);
     }
 
     @Override
     @Transactional
     public void update(Enterprise enterprise) {
+        if (enterprise == null) {
+            throw new NullPointerException("参数不能为空");
+        }
         enterpriseMapper.update(enterprise);
     }
 
@@ -51,4 +57,4 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     public List<Enterprise> findByCondition(String name, String contact, Integer status) {
         return enterpriseMapper.findByCondition(name, contact, status);
     }
-} 
+}

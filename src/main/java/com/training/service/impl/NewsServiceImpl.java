@@ -27,12 +27,18 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public boolean add(News news) {
+        if (news == null) {
+            throw new NullPointerException("参数不能为空");
+        }
         news.setCreateTime(LocalDateTime.now());
         return newsMapper.insert(news) > 0;
     }
 
     @Override
     public boolean update(News news) {
+        if (news == null) {
+            throw new NullPointerException("参数不能为空");
+        }
         return newsMapper.update(news) > 0;
     }
 
@@ -49,4 +55,4 @@ public class NewsServiceImpl implements NewsService {
             newsMapper.update(news);
         }
     }
-} 
+}

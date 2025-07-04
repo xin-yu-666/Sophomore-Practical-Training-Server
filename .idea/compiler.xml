@@ -8,11 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="training-server" />
         <module name="behind-beifen" />
+        <module name="Sophomore-Practical-Training-Server" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Sophomore-Practical-Training-Server" options="-parameters" />
       <module name="behind-beifen" options="-parameters" />
       <module name="training-server" options="-parameters" />
     </option>

@@ -17,12 +17,18 @@ public class MeetingServiceImpl implements MeetingService {
 
     @Override
     public int createMeeting(Meeting meeting) {
+        if (meeting == null) {
+            throw new NullPointerException("参数不能为空");
+        }
         meeting.setCreateTime(LocalDateTime.now());
         return meetingMapper.insertMeeting(meeting);
     }
 
     @Override
     public int updateMeeting(Meeting meeting) {
+        if (meeting == null) {
+            throw new NullPointerException("参数不能为空");
+        }
         return meetingMapper.updateMeeting(meeting);
     }
 
@@ -37,12 +43,14 @@ public class MeetingServiceImpl implements MeetingService {
     }
 
     @Override
-    public List<Meeting> getMeetingList(String name, String creator, String startDate, String endDate, Long userId, Integer status, int offset, int limit) {
+    public List<Meeting> getMeetingList(String name, String creator, String startDate, String endDate, Long userId,
+            Integer status, int offset, int limit) {
         return meetingMapper.selectMeetingList(name, creator, startDate, endDate, userId, status, offset, limit);
     }
 
     @Override
-    public int countMeetingList(String name, String creator, String startDate, String endDate, Long userId, Integer status) {
+    public int countMeetingList(String name, String creator, String startDate, String endDate, Long userId,
+            Integer status) {
         return meetingMapper.countMeetingList(name, creator, startDate, endDate, userId, status);
     }
-} 
+}

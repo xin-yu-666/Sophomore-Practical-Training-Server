@@ -32,12 +32,18 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public int addCourse(Course course) {
+		if (course == null) {
+			throw new NullPointerException("参数不能为空");
+		}
 		course.setCreateTime(new Date());
 		return courseMapper.insert(course);
 	}
 
 	@Override
 	public int updateCourse(Course course) {
+		if (course == null) {
+			throw new NullPointerException("参数不能为空");
+		}
 		return courseMapper.update(course);
 	}
 
