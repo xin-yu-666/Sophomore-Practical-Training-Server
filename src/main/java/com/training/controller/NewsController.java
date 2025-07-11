@@ -244,7 +244,15 @@ public class NewsController {
         News news = dtoToEntity(newsDTO);
         news.setId(id);
         news.setUserId(old.getUserId());
-        news.setStatus(old.getStatus());
+        
+        // 根据用户权限设置新闻状态：
+        // 管理员编辑后状态不变，普通用户编辑后需要重新审核
+        if (isAdmin) {
+            news.setStatus(old.getStatus()); // 管理员编辑，状态保持不变
+        } else {
+            news.setStatus(0); // 普通用户编辑，重新进入待审核状态
+        }
+        
         boolean ok = newsService.update(news);
         Map<String, Object> map = new HashMap<>();
         map.put("success", ok);
