@@ -2,20 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.trainingserver.mapper.NewsMapper">
+<mapper namespace="com.training.mapper.NewsMapper">
 
-    <resultMap id="newsResultMap" type="com.example.trainingserver.entity.News">
+    <resultMap id="newsResultMap" type="com.training.entity.News">
         <id property="id" column="id"/>
         <result property="title" column="title"/>
         <result property="summary" column="summary"/>
         <result property="author" column="author"/>
-        <result property="imageUrl" column="imageUrl"/>
+        <result property="imageUrl" column="imageUrl" jdbcType="BLOB"/>
         <result property="content" column="content"/>
         <result property="createTime" column="createTime"/>
+        <result property="userId" column="user_id"/>
+        <result property="status" column="status"/>
     </resultMap>
 
-    <select id="findAll" resultMap="newsResultMap">
-        SELECT * FROM news
+    <!-- 公共的where条件 -->
+    <sql id="whereCondition">
         <where>
             <if test="title != null and title != ''">
                 AND title LIKE CONCAT('%', #{title}, '%')
@@ -26,26 +28,54 @@
             <if test="author != null and author != ''">
                 AND author LIKE CONCAT('%', #{author}, '%')
             </if>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
         </where>
+    </sql>
+
+    <select id="findAll" resultMap="newsResultMap">
+        SELECT * FROM news
+        <include refid="whereCondition"/>
         ORDER BY createTime DESC
+    </select>
+
+    <!-- 新增：分页查询 -->
+    <select id="findByCondition" resultMap="newsResultMap">
+        SELECT * FROM news
+        <include refid="whereCondition"/>
+        ORDER BY createTime DESC
+        LIMIT #{offset}, #{size}
+    </select>
+
+    <!-- 新增：统计总数 -->
+    <select id="countByCondition" resultType="int">
+        SELECT COUNT(*) FROM news
+        <include refid="whereCondition"/>
     </select>
 
     <select id="findById" resultMap="newsResultMap">
         SELECT * FROM news WHERE id = #{id}
     </select>
 
-    <insert id="insert" parameterType="com.example.trainingserver.entity.News">
-        INSERT INTO news (title, summary, author, imageUrl, content, createTime)
-        VALUES (#{title}, #{summary}, #{author}, #{imageUrl}, #{content}, #{createTime})
+    <insert id="insert" parameterType="com.training.entity.News" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO news (title, summary, author, imageUrl, content, user_id, status, createTime)
+        VALUES (#{title}, #{summary}, #{author}, #{imageUrl,jdbcType=BLOB}, #{content}, #{userId}, #{status}, #{createTime})
     </insert>
 
-    <update id="update" parameterType="com.example.trainingserver.entity.News">
+    <update id="update" parameterType="com.training.entity.News">
         UPDATE news
-        SET title = #{title},
+        <set>
+            title = #{title},
             summary = #{summary},
             author = #{author},
-            imageUrl = #{imageUrl},
-            content = #{content}
+            <if test="imageUrl != null">imageUrl = #{imageUrl,jdbcType=BLOB},</if>
+            content = #{content},
+            status = #{status}
+        </set>
         WHERE id = #{id}
     </update>
 
